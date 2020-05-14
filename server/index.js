@@ -68,18 +68,24 @@ const getStationInfo = (stationName) => {
   })
 }
 
+const addUser = require('./database').addUser
+const getRoutes = require('./database').getRoutes
+
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
 
   if (!req.body.Body.indexOf('update')) {
-    twiml.message('This is where we would provide an update on the user\'s settings');
+    const pnumber = req.body.From
+    const routes = getRoutes(pnumber)
+    twiml.message('Info: ' + routes);
+
   } else if (!req.body.Body.indexOf('setup')) {
     const config = req.body.Body.replace("setup ", "")
     const pnumber = req.body.From
 
+    addUser(pnumber, config)
 
-
-    twiml.message('User settings saved.');
+    twiml.message('User settings saved for ' + pnumber);
   } else {
     twiml.message(
       'User message was not an update or setup request, so no action will be taken'
