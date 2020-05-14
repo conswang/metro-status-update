@@ -30,12 +30,6 @@ app.post('/sms', (req, res) => {
     twiml.message('This is where we would provide an update on the user\'s settings');
   } else if (!req.body.Body.indexOf('setup')) {
     twiml.message('This is where we would provide confirmation that a user\'s settings have been saved');
-  } else if (!req.body.Body.indexOf('station')) {
-    const arr = req.body.Body.split(" ")
-    console.log(arr)
-    info = getStationInfo(arr[1])
-    console.log(info)
-    twiml.message("success");
   } else {
     twiml.message(
       'User message was not an update or setup request, so no action will be taken'
