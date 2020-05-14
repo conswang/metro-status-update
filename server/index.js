@@ -44,12 +44,10 @@ const cronJob = cron.schedule(`0 * * * * *`, () =>  {
       });
       result.on('end', function () {
           var tweets = JSON.parse(buffer);
-          console.log(tweets); // the tweets!
+          //console.log(tweets); // the tweets!
       });
   })
 })
-
-
 
 const getStationInfo = (stationName) => {
   return https.get('https://myttc.ca/'+stationName+'_station.json', function (result) {
@@ -65,19 +63,31 @@ const getStationInfo = (stationName) => {
   })
 }
 
+const addRoute = require('./database').addRoute
+
+addRoute("510", "cancelled")
+addRoute("300", "delayed")
+addRoute("union 66", "delayed")
+
+const getRouteStatus = require('./database').getRouteStatus
 const addUser = require('./database').addUser
 const getRoutes = require('./database').getRoutes
 
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
 
-  if (!req.body.Body.indexOf('update')) {
+  if (!req.body.Body.indexOf('Update')) {
     const pnumber = req.body.From
+    console.log("phone:" + pnumber)
     const routes = getRoutes(pnumber)
-    twiml.message('Info: ' + routes);
+    console.log("routes:" + routes)
+    const status = getRouteStatus(routes)
+    console.log("status:" + status)
 
-  } else if (!req.body.Body.indexOf('setup')) {
-    const config = req.body.Body.replace("setup ", "")
+    twiml.message('Info: ' + status);
+
+  } else if (!req.body.Body.indexOf('Setup')) {
+    const config = req.body.Body.replace("Setup ", "")
     const pnumber = req.body.From
 
     addUser(pnumber, config)

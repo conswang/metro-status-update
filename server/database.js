@@ -6,10 +6,10 @@ let addUser = (number, routeList) => {
 }
 
 let getRoutes = (userPhoneNumber) => {
-  User.findOne({phoneNumber: userPhoneNumber})
+  return User.findOne({phoneNumber: userPhoneNumber})
   .then(
     user => {
-      console.log(user.routes)
+      console.log("User Routes:" + user.routes)
       // TODO: do stuff with user routes
       return user.routes
     }
@@ -20,7 +20,7 @@ let getRouteStatus = (routeNumber) => {
   Routes.findOne({number: routeNumber})
   .then(
     route => {
-      console.log(route.status)
+      console.log("Route Status: " + route.status)
       // TODO: stuff with route status
       return route.status
     }
