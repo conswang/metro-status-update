@@ -15,8 +15,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "https": "^1.0.0",
+    "mongodb": "^3.5.7",
+    "mongoose": "^5.9.14",
     "node-cron": "^2.0.3",
-    "oauth": "^0.9.15"
+    "oauth": "^0.9.15",
     "twilio": "^3.43.1"
   }
 }
