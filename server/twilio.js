@@ -1,3 +1,0 @@
-
-const accountSid="";
-const authToken= "";
