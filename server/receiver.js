@@ -23,13 +23,17 @@ const getStationInfo = (stationName) => {
 }
 
 app.post('/sms', (req, res) => {
-  console.log("gogogo")
   const twiml = new MessagingResponse();
 
   if (!req.body.Body.indexOf('update')) {
     twiml.message('This is where we would provide an update on the user\'s settings');
   } else if (!req.body.Body.indexOf('setup')) {
-    twiml.message('This is where we would provide confirmation that a user\'s settings have been saved');
+    const config = req.body.Body.replace("setup ", "")
+    const pnumber = req.body.From
+
+
+
+    twiml.message('User settings saved.');
   } else {
     twiml.message(
       'User message was not an update or setup request, so no action will be taken'
