@@ -30,9 +30,6 @@ var options = {
   }
 }
 
-const addRoute = require('./database').addRoute
-addRoute({number: '510', status: 'delayed'})
-
 // Pull updates from TTC every second
 const cron = require('node-cron')
 
