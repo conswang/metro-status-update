@@ -4,6 +4,15 @@
 
 Text (587) 801-7290
 
+#### First Time Setup
+
+If you want Line 1 at Union St, text:
+```
+setup line1 union 
+```
+
+Then you can text "status" for an update on the status
+
 ## Requirements
 npm:
 - twilio
