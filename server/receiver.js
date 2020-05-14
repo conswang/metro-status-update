@@ -10,21 +10,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/', (req, res) => {
   const twiml = new MessagingResponse();
 
-  if (req.body.Body == 'update') {
-    twiml.message('Hi!');
-  } else if (req.body.Body == 'bye') {
-    twiml.message('Goodbye');
+  if (!req.body.Body,indexOf('update')) {
+    twiml.message('This is where we would provide an update on the user\'s settings');
+  } else if (!req.body.Body,indexOf('setup')) {
+    twiml.message('This is where we would provide confirmation that a user\'s settings have been saved');
   } else {
     twiml.message(
-      'No Body param match, Twilio sends this in the request to your server.'
+      'User message was not an update or setup request, so no action will be taken'
     );
   }
 
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
 });
-
-var getStationInfo
 
 http.createServer(app).listen(1337, () => {
   console.log('Express server listening on port 1337');
