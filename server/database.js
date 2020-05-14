@@ -17,7 +17,7 @@ let getRoutes = (userPhoneNumber) => {
 }
 
 let getRouteStatus = (routeNumber) => {
-  Routes.findOne({number: routeNumber})
+  return Routes.findOne({number: routeNumber})
   .then(
     route => {
       console.log("Route Status: " + route.status)

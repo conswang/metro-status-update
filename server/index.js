@@ -78,9 +78,7 @@ app.post('/sms', (req, res) => {
 
   if (!req.body.Body.indexOf('Update')) {
     const pnumber = req.body.From
-    console.log("phone:" + pnumber)
     const routes = getRoutes(pnumber)
-    console.log("routes:" + routes)
     const status = getRouteStatus(routes)
     console.log("status:" + status)
 
