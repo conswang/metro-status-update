@@ -9,6 +9,19 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 
+// Database connection
+const mongoose = require('mongoose')
+
+const uri = "mongodb+srv://hello:hello@cluster0-fe3he.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true}
+  );
+  const connection = mongoose.connection;
+  connection.once('open', () => {
+      console.log('MongoDB database connection established successfully');
+  });
+
+// Request parameters
+
 var options = {
   hostname: 'api.twitter.com',
   path: '/1.1/statuses/user_timeline.json?screen_name=TTCnotices',
